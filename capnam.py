@@ -6,8 +6,8 @@ FPS = 15
 WINDOWWIDTH = 640
 WINDOWHEIGHT = 640
 TILESIZE = 20
-assert WINDOWWIDTH % TILESIZE == 0, "Window width must be a multiple of TILE size."
-assert WINDOWHEIGHT % TILESIZE == 0, "Window height must be a multiple of TILE size."
+assert WINDOWWIDTH % TILESIZE == 0, "Window width must be a multiple of tile size."
+assert WINDOWHEIGHT % TILESIZE == 0, "Window height must be a multiple of tile size."
 TILEWIDTH = int(WINDOWWIDTH / TILESIZE)
 TILEHEIGHT = int(WINDOWHEIGHT / TILESIZE)
 
@@ -23,7 +23,6 @@ DOWN = 'down'
 LEFT = 'left'
 RIGHT = 'right'
 
-HEAD = 0
 
 def main():
     global FPSCLOCK, DISPLAYSURF
@@ -64,19 +63,19 @@ def runGame():
                     terminate()
 
         # check if theplayer has hit the edge
-        if pCoords[HEAD]['x'] == -1 or pCoords[HEAD]['x'] == TILEWIDTH or pCoords[HEAD]['y'] == -1 or pCoords[HEAD]['y'] == TILEHEIGHT:
-            newPos = {'x': pCoords[HEAD]['x'], 'y': pCoords[HEAD]['y']}
+        if pCoords[0]['x'] == -1 or pCoords[0]['x'] == TILEWIDTH or pCoords[0]['y'] == -1 or pCoords[0]['y'] == TILEHEIGHT:
+            newPos = {'x': pCoords[0]['x'], 'y': pCoords[0]['y']}
 
 
         # move the player
         if direction == UP:
-            newPos = {'x': pCoords[HEAD]['x'], 'y': pCoords[HEAD]['y'] - 1}
+            newPos = {'x': pCoords[0]['x'], 'y': pCoords[0]['y'] - 1}
         elif direction == DOWN:
-            newPos = {'x': pCoords[HEAD]['x'], 'y': pCoords[HEAD]['y'] + 1}
+            newPos = {'x': pCoords[0]['x'], 'y': pCoords[0]['y'] + 1}
         elif direction == LEFT:
-            newPos = {'x': pCoords[HEAD]['x'] - 1, 'y': pCoords[HEAD]['y']}
+            newPos = {'x': pCoords[0]['x'] - 1, 'y': pCoords[0]['y']}
         elif direction == RIGHT:
-            newPos = {'x': pCoords[HEAD]['x'] + 1, 'y': pCoords[HEAD]['y']}
+            newPos = {'x': pCoords[0]['x'] + 1, 'y': pCoords[0]['y']}
         pCoords.insert(0, newPos) #add new position
         del pCoords[-1] # remove last position
         DISPLAYSURF.fill(BGCOLOR)
