@@ -4,11 +4,11 @@ from pygame.locals import *
 from GameWindow import GameWindow
 from Capnam import Capnam
 
-#directions
-UP = 'up'
-DOWN = 'down'
-LEFT = 'left'
-RIGHT = 'right'
+#directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
+# UP = 'up'
+# DOWN = 'down'
+# LEFT = 'left'
+# RIGHT = 'right'
 
 
 def main():
@@ -21,6 +21,7 @@ def main():
         runGame()
 
 
+# runGame might be adapted to be in Capnam() - A-Small-Being
 def runGame():
     direction = 'RIGHT'
     capnam = Capnam(gameWindow)
@@ -42,8 +43,10 @@ def runGame():
                 elif event.key == K_ESCAPE:
                     terminate()
         capnam.movePlayer(direction)
-        if capnam.hitEdge():
-            capnam.drawPlayer()
+
+        # This code doesn't work yet
+        # if capnam.hitEdge():
+        #     capnam.drawPlayer()
 
         gameWindow.drawGrid()
         pygame.display.update()

@@ -1,6 +1,6 @@
-#Game window object
+#Game window class
 
-#Import pygame
+#Import pygame - not sure what is needed here - A-Small-Being
 import pygame, sys
 from pygame.locals import *
 
@@ -27,7 +27,6 @@ class GameWindow:
 
     def initialiseGame(self):
         global FPSCLOCK, DISPLAYSURF
-
         pygame.init()
         self.FPSCLOCK = pygame.time.Clock()
         self.DISPLAYSURF = pygame.display.set_mode((self.WINDOWWIDTH, self.WINDOWHEIGHT))
@@ -52,4 +51,5 @@ class GameWindow:
         for coord in pCoords:
             self.x = coord['x'] * self.TILESIZE - 10 # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
             self.y = coord['y'] * self.TILESIZE - 10
-            pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
+            # I think this is the problem - A-Small-Being
+            pygame.draw.circle(self.DISPLAYSURF, (255, 255,   0), (self.x,self.y), 10)
