@@ -7,14 +7,14 @@ from pygame.locals import *
 class GameWindow:
     def __init__(self):
         #set variables
-        self.FPS = 15
+        self.FPS = 8
         self.WINDOWWIDTH = 640
         self.WINDOWHEIGHT = 640
         self.TILESIZE = 20
         #check it works
         assert self.WINDOWWIDTH % self.TILESIZE == 0, "Window width must be a multiple of tile size."
         assert self.WINDOWHEIGHT % self.TILESIZE == 0, "Window height must be a multiple of tile size."
-        #set tiles
+        #Width and height in tiles
         self.TILEWIDTH = int(self.WINDOWWIDTH / self.TILESIZE)
         self.TILEHEIGHT = int(self.WINDOWHEIGHT / self.TILESIZE)
 
@@ -52,4 +52,4 @@ class GameWindow:
             self.x = coord['x'] * self.TILESIZE - 10 # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
             self.y = coord['y'] * self.TILESIZE - 10
             # I think this is the problem - A-Small-Being
-            pygame.draw.circle(self.DISPLAYSURF, (255, 255,   0), (self.x,self.y), 10)
+            pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)

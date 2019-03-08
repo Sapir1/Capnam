@@ -24,6 +24,7 @@ def main():
 # runGame might be adapted to be in Capnam() - A-Small-Being
 def runGame():
     direction = 'RIGHT'
+    # Hazel Move this!!!
     capnam = Capnam(gameWindow)
     capnam.drawPlayer()
     while True: # main game loop
@@ -42,13 +43,14 @@ def runGame():
                     direction = 'DOWN'
                 elif event.key == K_ESCAPE:
                     terminate()
-        capnam.movePlayer(direction)
 
         # This code doesn't work yet
-        # if capnam.hitEdge():
-        #     capnam.drawPlayer()
-
         gameWindow.drawGrid()
+        if capnam.hitEdge():
+            capnam.drawPlayer()
+        else:
+            capnam.movePlayer(direction)
+
         pygame.display.update()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)
 
