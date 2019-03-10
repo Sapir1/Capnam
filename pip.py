@@ -1,10 +1,10 @@
 """
-the pips class
+the pip class
 """
 from baseObject import baseObject
 class pip(baseObject):
     def __init__(self,gameWindow,x,y):
-        #instance of gameWindow
+        #an instance of gameWindow
         self.gameWindow = gameWindow
         #the x and y
         self.pCoords = [{'x': x,'y': y}]

@@ -5,6 +5,8 @@ from GameWindow import GameWindow
 from Capnam import Capnam
 from pip import pip
 
+#we might want to devide this script up later or it will get really large and hard to read - Batrex
+
 #directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
 # UP = 'up'
 # DOWN = 'down'
@@ -13,7 +15,7 @@ from pip import pip
 
 def checkcollision(obj1,obj2):
     """
-    checks the collision between objects
+    checks the collision between any two objects
     """
     if obj1.pCoords == obj2.pCoords:
         return True
@@ -35,13 +37,17 @@ def runGame():
     direction = 'RIGHT'
     # Hazel Move this!!!
     capnam = Capnam(gameWindow)
+    #create the pips
+    #this will be done differently when we add walls
     pips = []
     for x in range(gameWindow.TILEWIDTH):
         for y in range(gameWindow.TILEHEIGHT):
             pips.append(pip(gameWindow,x+1,y+1))
     #declare the font
-    font = pygame.font.SysFont('Comic Sans MS', 30)
-    while True: # main game loop
+    font = pygame.font.SysFont('calibri', 30)
+
+    # main game loop
+    while True:
         for event in pygame.event.get(): # event handling loop
             print(event)
             if event.type == QUIT:
@@ -57,8 +63,9 @@ def runGame():
                     direction = 'DOWN'
                 elif event.key == K_ESCAPE:
                     terminate()
+        #draw the grid
         gameWindow.drawGrid()
-        #check for the pip and capnam colliding
+        #check for the pips and capnam colliding
         #we cant use the name pip here because that is already a class name
         for index,item in enumerate(pips):
             if checkcollision(item,capnam):
@@ -67,14 +74,15 @@ def runGame():
 
         #draw the pips
         for i in pips:
-            i.drawObject()
+            i.draw()
+
 
         #draw and update the capnam
         if capnam.hitEdge():
-            capnam.drawObject()
+            capnam.draw()
         else:
             capnam.movePlayer(direction)
-            capnam.drawObject()
+            capnam.draw()
 
         #display the score
         capnam.displayScore(font)
