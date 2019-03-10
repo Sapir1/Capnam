@@ -10,4 +10,4 @@ class pip(baseObject):
         self.pCoords = [{'x': x,'y': y}]
         #set the colour and size for drawing
         self.colour = self.gameWindow.BLUE
-        self.size = 10
+        self.size = int(gameWindow.TILESIZE/4)

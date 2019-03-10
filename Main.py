@@ -36,8 +36,9 @@ def runGame():
     # Hazel Move this!!!
     capnam = Capnam(gameWindow)
     pips = []
-    for i in range(2):
-        pips.append(pip(gameWindow,1,i+1))
+    for x in range(gameWindow.TILEWIDTH):
+        for y in range(gameWindow.TILEHEIGHT):
+            pips.append(pip(gameWindow,x+1,y+1))
     #declare the font
     font = pygame.font.SysFont('Comic Sans MS', 30)
     while True: # main game loop
