@@ -26,7 +26,7 @@ def runGame():
     direction = 'RIGHT'
     # Hazel Move this!!!
     capnam = Capnam(gameWindow)
-    capnam.drawPlayer()
+    capnam.drawObject()
     while True: # main game loop
         for event in pygame.event.get(): # event handling loop
             print(event)
@@ -47,9 +47,10 @@ def runGame():
         # This code doesn't work yet
         gameWindow.drawGrid()
         if capnam.hitEdge():
-            capnam.drawPlayer()
+            capnam.drawObject()
         else:
             capnam.movePlayer(direction)
+            capnam.drawObject()
 
         pygame.display.update()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)

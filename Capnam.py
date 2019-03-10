@@ -1,6 +1,9 @@
 #player class
 
-class Capnam:
+import pygame,sys
+from baseObject import baseObject
+
+class Capnam(baseObject):
     def __init__(self,gameWindow):
         #directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
         # self.UP = 'up
@@ -15,11 +18,14 @@ class Capnam:
         self.startx = 10
         self.starty = 10
         self.pCoords = [{'x': self.startx,'y': self.starty}] #Player coordinates
-
+        #set the colour and size
+        self.colour = self.gameWindow.YELLOW
+        self.size = int(self.gameWindow.TILESIZE/2)
     def movePlayer(self,direction):
         """
         Works out where player should go and starts draw process
         """
+        #is there a reason for adding this variable newpos? why not just change the position - Batrex
         if direction == 'UP':
             self.newPos = {'x': self.pCoords[0]['x'], 'y': self.pCoords[0]['y'] - 1}
         elif direction == 'DOWN':
@@ -32,13 +38,7 @@ class Capnam:
         self.pCoords.insert(0, self.newPos) #add new position
         del self.pCoords[-1] # remove last position
 
-        self.drawPlayer()
 
-    def drawPlayer(self):
-        """
-        Tells main.py object gameWindow to draw player on screen
-        """
-        self.gameWindow.drawCircle(self.pCoords)
 
     def hitEdge(self):
         # Hit edge code not finished - A-Small-Being

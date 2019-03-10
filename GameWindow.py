@@ -10,7 +10,7 @@ class GameWindow:
         self.FPS = 8
         self.WINDOWWIDTH = 640
         self.WINDOWHEIGHT = 640
-        self.TILESIZE = 20
+        self.TILESIZE = 40
         #check it works
         assert self.WINDOWWIDTH % self.TILESIZE == 0, "Window width must be a multiple of tile size."
         assert self.WINDOWHEIGHT % self.TILESIZE == 0, "Window height must be a multiple of tile size."
@@ -51,5 +51,4 @@ class GameWindow:
         for coord in pCoords:
             self.x = coord['x'] * self.TILESIZE - 10 # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
             self.y = coord['y'] * self.TILESIZE - 10
-            # I think this is the problem - A-Small-Being
             pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
