@@ -11,12 +11,20 @@ from pip import pip
 # LEFT = 'left'
 # RIGHT = 'right'
 
-
+def checkcollision(obj1,obj2):
+    """
+    checks the collision between objects
+    """
+    if obj1.pCoords == obj2.pCoords:
+        return True
+    else:
+        return False
 def main():
     global gameWindow
     gameWindow = GameWindow()
     gameWindow.initialiseGame()
     gameWindow.drawGrid()
+
 
     while True:
         runGame()
@@ -27,8 +35,11 @@ def runGame():
     direction = 'RIGHT'
     # Hazel Move this!!!
     capnam = Capnam(gameWindow)
-    pip1 = pip(gameWindow,10,10)
-    print(pip1.colour)
+    pips = []
+    for i in range(2):
+        pips.append(pip(gameWindow,1,i+1))
+    #declare the font
+    font = pygame.font.SysFont('Comic Sans MS', 30)
     while True: # main game loop
         for event in pygame.event.get(): # event handling loop
             print(event)
@@ -45,14 +56,27 @@ def runGame():
                     direction = 'DOWN'
                 elif event.key == K_ESCAPE:
                     terminate()
-
         gameWindow.drawGrid()
+        #check for the pip and capnam colliding
+        #we cant use the name pip here because that is already a class name
+        for index,item in enumerate(pips):
+            if checkcollision(item,capnam):
+                capnam.increaseScore()
+                del pips[index]
+
+        #draw the pips
+        for i in pips:
+            i.drawObject()
+
+        #draw and update the capnam
         if capnam.hitEdge():
             capnam.drawObject()
         else:
             capnam.movePlayer(direction)
             capnam.drawObject()
-        pip1.drawObject()
+
+        #display the score
+        capnam.displayScore(font)
 
         pygame.display.update()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)

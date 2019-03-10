@@ -29,6 +29,7 @@ class GameWindow:
     def initialiseGame(self):
         global FPSCLOCK, DISPLAYSURF
         pygame.init()
+        pygame.font.init()
         self.FPSCLOCK = pygame.time.Clock()
         self.DISPLAYSURF = pygame.display.set_mode((self.WINDOWWIDTH, self.WINDOWHEIGHT))
         pygame.display.set_caption('Capnam')

@@ -21,6 +21,8 @@ class Capnam(baseObject):
         #set the colour and size
         self.colour = self.gameWindow.YELLOW
         self.size = int(self.gameWindow.TILESIZE/2)
+        #the score variable
+        self.score = 0
     def movePlayer(self,direction):
         """
         Works out where player should go and starts draw process
@@ -65,3 +67,9 @@ class Capnam(baseObject):
         del self.pCoords[-1]
         # self.drawPlayer()
         return True
+    def increaseScore(self):
+        self.score += 1
+
+    def displayScore(self,font):
+        textSurface = font.render(str(self.score),False,self.gameWindow.WHITE)
+        self.gameWindow.DISPLAYSURF.blit(textSurface,(0,0))
