@@ -3,6 +3,7 @@ from pygame.locals import *
 #import classes
 from GameWindow import GameWindow
 from Capnam import Capnam
+from pip import pip
 
 #directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
 # UP = 'up'
@@ -26,7 +27,8 @@ def runGame():
     direction = 'RIGHT'
     # Hazel Move this!!!
     capnam = Capnam(gameWindow)
-    capnam.drawObject()
+    pip1 = pip(gameWindow,10,10)
+    print(pip1.colour)
     while True: # main game loop
         for event in pygame.event.get(): # event handling loop
             print(event)
@@ -44,13 +46,13 @@ def runGame():
                 elif event.key == K_ESCAPE:
                     terminate()
 
-        # This code doesn't work yet
         gameWindow.drawGrid()
         if capnam.hitEdge():
             capnam.drawObject()
         else:
             capnam.movePlayer(direction)
             capnam.drawObject()
+        pip1.drawObject()
 
         pygame.display.update()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)

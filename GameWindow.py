@@ -18,9 +18,10 @@ class GameWindow:
         self.TILEWIDTH = int(self.WINDOWWIDTH / self.TILESIZE)
         self.TILEHEIGHT = int(self.WINDOWHEIGHT / self.TILESIZE)
 
-        #Colors       R    G    B
+        #Colors            R    G    B
         self.WHITE     = (255, 255, 255)
         self.BLACK     = (  0,   0,   0)
+        self.BLUE      = (  0,   0, 255)
         self.YELLOW    = (255, 255,   0)
         self.DARKGRAY  = ( 40,  40,  40)
         self.BGCOLOR = self.BLACK
