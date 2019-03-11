@@ -26,8 +26,6 @@ def checkcollision(obj1,obj2):
 def main():
     global gameWindow
     gameWindow = GameWindow()
-    global wall
-    wall = Wall(gameWindow)
     global capnam
     capnam = Capnam(gameWindow)
 
@@ -46,8 +44,11 @@ def runGame():
     for x in range(gameWindow.TILEWIDTH):
         for y in range(gameWindow.TILEHEIGHT):
             pips.append(pip(gameWindow,x+1,y+1))
-    # #declare the font
-    # font = pygame.font.SysFont('calibri', 30)
+
+    # This will be read from a file with a function when I can be bothered
+    walls = []
+    walls.append(Wall(gameWindow,5,5))
+    walls.append(Wall(gameWindow,5,6))
 
     # main game loop
     while True:
@@ -77,6 +78,9 @@ def runGame():
 
         #draw the pips
         for i in pips:
+            i.draw()
+
+        for i in walls:
             i.draw()
 
 

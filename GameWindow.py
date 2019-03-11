@@ -48,14 +48,14 @@ class GameWindow:
         for y in range(0, self.WINDOWHEIGHT, self.TILESIZE): # draw horizontal lines
             pygame.draw.line(self.DISPLAYSURF, self.DARKGRAY, (0, y), (self.WINDOWWIDTH, y))
 
-    def drawCircle(self,pCoords):
-        """
-        Called from Main, draws circle on screen in x,y position
-        """
-        for coord in pCoords:
-            self.x = coord['x'] * self.TILESIZE - 10 # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
-            self.y = coord['y'] * self.TILESIZE - 10
-            pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
+    # def drawCircle(self,pCoords,color):
+    #     """
+    #     Called from Main, draws circle on screen in x,y position
+    #     """
+    #     for coord in pCoords:
+    #         self.x = coord['x'] * self.TILESIZE - 10 # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
+    #         self.y = coord['y'] * self.TILESIZE - 10
+    #         pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
 
     def displayText(self,text):
         """
