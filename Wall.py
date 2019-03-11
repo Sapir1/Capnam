@@ -1,4 +1,5 @@
 # Wall class
+
 class Wall:
     def __init__(self,gameWindow):
         # self.wCoords = wCoords

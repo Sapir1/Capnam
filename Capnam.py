@@ -54,7 +54,6 @@ class Capnam(baseObject):
         elif self.pCoords[0]['x'] == self.gameWindow.TILEWIDTH+1:
             # Too far right
             self.newPos = {'x': self.pCoords[0]['x'] - 1, 'y': self.pCoords[0]['y']}
-            # print(newPos)
         elif self.pCoords[0]['y'] == 0:
             # Too far up
             self.newPos = {'x': self.pCoords[0]['x'], 'y': self.pCoords[0]['y'] + 1}
@@ -66,7 +65,6 @@ class Capnam(baseObject):
             return False
         self.pCoords.insert(0,self.newPos)
         del self.pCoords[-1]
-        # self.drawPlayer()
         return True
 
     def increaseScore(self):
@@ -74,12 +72,3 @@ class Capnam(baseObject):
         increments the score
         """
         self.score += 1
-
-    def displayScore(self,font):
-        """
-        displays the score as text
-        """
-        #first rendering the text onto a surface
-        textSurface = font.render(str(self.score),True,self.gameWindow.WHITE)
-        #then displaying that to the main display surface
-        self.gameWindow.DISPLAYSURF.blit(textSurface,(0,0))

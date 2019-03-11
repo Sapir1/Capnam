@@ -4,6 +4,7 @@ from pygame.locals import *
 from GameWindow import GameWindow
 from Capnam import Capnam
 from pip import pip
+from Wall import Wall
 
 #we might want to devide this script up later or it will get really large and hard to read - Batrex
 
@@ -21,9 +22,15 @@ def checkcollision(obj1,obj2):
         return True
     else:
         return False
+
 def main():
     global gameWindow
     gameWindow = GameWindow()
+    global wall
+    wall = Wall(gameWindow)
+    global capnam
+    capnam = Capnam(gameWindow)
+
     gameWindow.initialiseGame()
     gameWindow.drawGrid()
 
@@ -31,20 +38,16 @@ def main():
     while True:
         runGame()
 
-
-# runGame might be adapted to be in Capnam() - A-Small-Being
 def runGame():
     direction = 'RIGHT'
-    # Hazel Move this!!!
-    capnam = Capnam(gameWindow)
     #create the pips
     #this will be done differently when we add walls
     pips = []
     for x in range(gameWindow.TILEWIDTH):
         for y in range(gameWindow.TILEHEIGHT):
             pips.append(pip(gameWindow,x+1,y+1))
-    #declare the font
-    font = pygame.font.SysFont('calibri', 30)
+    # #declare the font
+    # font = pygame.font.SysFont('calibri', 30)
 
     # main game loop
     while True:
@@ -84,8 +87,8 @@ def runGame():
             capnam.movePlayer(direction)
             capnam.draw()
 
-        #display the score
-        capnam.displayScore(font)
+        # Displayes score on screen
+        gameWindow.displayText(capnam.score)
 
         pygame.display.update()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)

@@ -33,6 +33,8 @@ class GameWindow:
         self.FPSCLOCK = pygame.time.Clock()
         self.DISPLAYSURF = pygame.display.set_mode((self.WINDOWWIDTH, self.WINDOWHEIGHT))
         pygame.display.set_caption('Capnam')
+        #declare the font
+        self.font = pygame.font.SysFont('calibri', 30)
 
     def drawGrid(self):
         """
@@ -54,3 +56,12 @@ class GameWindow:
             self.x = coord['x'] * self.TILESIZE - 10 # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
             self.y = coord['y'] * self.TILESIZE - 10
             pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
+
+    def displayText(self,text):
+        """
+        displays the score as text
+        """
+        #first rendering the text onto a surface
+        textSurface = self.font.render(str(text),True,self.WHITE)
+        #then displaying that to the main display surface
+        self.DISPLAYSURF.blit(textSurface,(0,0))
