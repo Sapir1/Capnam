@@ -10,12 +10,15 @@ class Wall(baseObject):
         # self.colour = self.gameWindow.WHITE
 
         self.gameWindow = gameWindow
+        #self.pCoords = [{'x': x,'y': y}]
         self.colour = self.gameWindow.WHITE
-        self.size = int(gameWindow.TILESIZE/4)
-        self.pCoords = [{'x': x,'y': y}]
+        self.size = int(gameWindow.TILESIZE/2)
+        self.x = [x]
+        self.y = [y]
+        
 
-    def drawWall(self):
-        """
-        Tell gameWindow to draw 'wall' on screen
-        """
-        self.gameWindow.drawCircle(self.pCoords,self.gameWindow.WHITE)
+    #def drawWall(self):
+     #   """
+      #  Tell gameWindow to draw 'wall' on screen
+       # """
+        #self.gameWindow.drawCircle(self.pCoords,self.gameWindow.WHITE)

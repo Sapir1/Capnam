@@ -15,9 +15,8 @@ class Capnam(baseObject):
         self.gameWindow = gameWindow
 
         #start point
-        self.startx = 10
-        self.starty = 10
-        self.pCoords = [{'x': self.startx,'y': self.starty}] #Player coordinates
+        self.x = [10]
+        self.y = [10]
         #set the colour and size for drawing
         self.colour = self.gameWindow.YELLOW
         self.size = int(self.gameWindow.TILESIZE/2)
@@ -28,44 +27,40 @@ class Capnam(baseObject):
         """
         Works out where player should go and starts draw process
         """
-        #is there a reason for adding this variable newpos? why not just change the position - Batrex
         if direction == 'UP':
-            self.newPos = {'x': self.pCoords[0]['x'], 'y': self.pCoords[0]['y'] - 1}
+            self.y[0] -= 1
         elif direction == 'DOWN':
-            self.newPos = {'x': self.pCoords[0]['x'], 'y': self.pCoords[0]['y'] + 1}
+            self.y[0] += 1
         elif direction == 'LEFT':
-            self.newPos = {'x': self.pCoords[0]['x'] - 1, 'y': self.pCoords[0]['y']}
+            self.x[0] -= 1
         elif direction == 'RIGHT':
-            self.newPos = {'x': self.pCoords[0]['x'] + 1, 'y': self.pCoords[0]['y']}
-
-        self.pCoords.insert(0, self.newPos) #add new position
-        del self.pCoords[-1] # remove last position
+            self.x[0] += 1
 
 
 
-    def hitEdge(self):
+
+    def hitEdge(self,direction):
         # Hit edge code not finished - A-Small-Being
         """
         Check to see if player has hit edge
         """
-        if self.pCoords[0]['x'] == 0:
+        if self.x[0] == 1 and direction == 'LEFT':
             #too far left
-            self.newPos = {'x': self.pCoords[0]['x'] + 1, 'y': self.pCoords[0]['y']}
-        elif self.pCoords[0]['x'] == self.gameWindow.TILEWIDTH+1:
+            self.x[0] = 1
+        elif self.x[0] == self.gameWindow.TILEWIDTH and direction == 'RIGHT':
             # Too far right
-            self.newPos = {'x': self.pCoords[0]['x'] - 1, 'y': self.pCoords[0]['y']}
-        elif self.pCoords[0]['y'] == 0:
+            self.x[0] = self.gameWindow.TILEWIDTH
+        elif self.y[0] == 1 and direction == 'UP':
             # Too far up
-            self.newPos = {'x': self.pCoords[0]['x'], 'y': self.pCoords[0]['y'] + 1}
-        elif self.pCoords[0]['y'] == self.gameWindow.TILEHEIGHT+1:
+            self.y[0] = self.y[0]
+        elif self.y[0] == self.gameWindow.TILEHEIGHT and direction == 'DOWN':
             # Too far down
-            self.newPos = {'x': self.pCoords[0]['x'], 'y': self.pCoords[0]['y'] - 1}
+            self.y[0] = self.y[0]
         else:
             # Fine
             return False
-        self.pCoords.insert(0,self.newPos)
-        del self.pCoords[-1]
         return True
+        
 
     def increaseScore(self):
         """
