@@ -39,23 +39,23 @@ class Capnam(baseObject):
 
 
 
-    def hitEdge(self):
+    def hitEdge(self,direction):
         # Hit edge code not finished - A-Small-Being
         """
         Check to see if player has hit edge
         """
-        if self.x[0] < 1:
+        if self.x[0] == 1 and direction == 'LEFT':
             #too far left
             self.x[0] = 1
-        elif self.x[0] > self.gameWindow.TILEWIDTH:
+        elif self.x[0] == self.gameWindow.TILEWIDTH and direction == 'RIGHT':
             # Too far right
             self.x[0] = self.gameWindow.TILEWIDTH
-        elif self.y[0] == 0:
+        elif self.y[0] == 1 and direction == 'UP':
             # Too far up
-            self.y[0] += 1
-        elif self.y[0] == self.gameWindow.TILEHEIGHT+1:
+            self.y[0] = self.y[0]
+        elif self.y[0] == self.gameWindow.TILEHEIGHT and direction == 'DOWN':
             # Too far down
-            self.y[0] -= 1
+            self.y[0] = self.y[0]
         else:
             # Fine
             return False

@@ -89,7 +89,7 @@ def runGame():
 
 
         #draw and update the capnam
-        if capnam.hitEdge():
+        if capnam.hitEdge(direction):
             capnam.draw()
         else:
             capnam.movePlayer(direction)
