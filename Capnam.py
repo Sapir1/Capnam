@@ -2,21 +2,22 @@
 
 import pygame,sys
 from baseObject import baseObject
+from direction import Direction
 
 class Capnam(baseObject):
     def __init__(self,gameWindow):
         #directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
         # self.UP = 'up
-        # self.DOWN = 'down'
-        # self.LEFT = 'left'
-        # self.RIGHT = 'right'
+        # self.DOWN = direction.DOWN'
+        # self.LEFT = direction.LEFT
+        # self.RIGHT = direction.RIGHT
 
         # instance of object gameWindow from class GameWindow
         self.gameWindow = gameWindow
 
         #start point
-        self.x = [10]
-        self.y = [10]
+        self.x = 10
+        self.y = 10
         #set the colour and size for drawing
         self.colour = self.gameWindow.YELLOW
         self.size = int(self.gameWindow.TILESIZE/2)
@@ -27,35 +28,49 @@ class Capnam(baseObject):
         """
         Works out where player should go and starts draw process
         """
-        if direction == 'UP':
-            self.y[0] -= 1
-        elif direction == 'DOWN':
-            self.y[0] += 1
-        elif direction == 'LEFT':
-            self.x[0] -= 1
-        elif direction == 'RIGHT':
-            self.x[0] += 1
+        if direction == Direction.UP:
+            self.y -= 1
+        elif direction == Direction.DOWN:
+            self.y += 1
+        elif direction == Direction.LEFT:
+            self.x -= 1
+        elif direction == Direction.RIGHT:
+            self.x += 1
 
 
 
 
-    def hitEdge(self,direction):
+    def hitDetect(self, direction, solid):
         # Hit edge code not finished - A-Small-Being
         """
-        Check to see if player has hit edge
+        Check to see if player has hit edge or wall
         """
-        if self.x[0] == 1 and direction == 'LEFT':
+        modX = self.x
+        modY = self.y
+        if direction == Direction.LEFT:
+            modX -= 1
+        elif direction == Direction.RIGHT:
+            modX += 1
+        elif direction == Direction.UP:
+            modY -= 1
+        elif direction == Direction.DOWN:
+            modY += 1
+        
+        if (modX, modY) in solid:
+            return True
+
+        if modX == 0:
             #too far left
-            self.x[0] = 1
-        elif self.x[0] == self.gameWindow.TILEWIDTH and direction == 'RIGHT':
+            pass
+        elif modX == self.gameWindow.TILEWIDTH + 1:
             # Too far right
-            self.x[0] = self.gameWindow.TILEWIDTH
-        elif self.y[0] == 1 and direction == 'UP':
+            pass
+        elif modY == 0:
             # Too far up
-            self.y[0] = self.y[0]
-        elif self.y[0] == self.gameWindow.TILEHEIGHT and direction == 'DOWN':
+            pass
+        elif modY == self.gameWindow.TILEHEIGHT + 1:
             # Too far down
-            self.y[0] = self.y[0]
+            pass
         else:
             # Fine
             return False

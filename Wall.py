@@ -13,8 +13,8 @@ class Wall(baseObject):
         #self.pCoords = [{'x': x,'y': y}]
         self.colour = self.gameWindow.WHITE
         self.size = int(gameWindow.TILESIZE/2)
-        self.x = [x]
-        self.y = [y]
+        self.x = x
+        self.y = y
         
 
     #def drawWall(self):

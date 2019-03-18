@@ -14,14 +14,12 @@ class baseObject:
         self.gameWindow = gameWindow
         self.colour = self.gameWindow.YELLOW
         self.size = int(self.gameWindow.TILESIZE)
-        self.x = [x]
-        self.y = [y]
+        self.x = x
+        self.y = y
     def draw(self):
         """
         draws the object
         """
-        for coord in self.x:
-            self.xcoord = coord * self.gameWindow.TILESIZE - int(self.gameWindow.TILESIZE/2) # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
-        for coord in self.y:
-            self.ycoord = coord * self.gameWindow.TILESIZE - int(self.gameWindow.TILESIZE/2)
+        self.xcoord = self.x * self.gameWindow.TILESIZE - int(self.gameWindow.TILESIZE/2) # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
+        self.ycoord = self.y * self.gameWindow.TILESIZE - int(self.gameWindow.TILESIZE/2)
         pygame.draw.circle(self.gameWindow.DISPLAYSURF, self.colour, (self.xcoord,self.ycoord), self.size)

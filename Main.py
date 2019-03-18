@@ -5,14 +5,9 @@ from GameWindow import GameWindow
 from Capnam import Capnam
 from pip import pip
 from Wall import Wall
+from direction import Direction
 
 #we might want to divide this script up later or it will get really large and hard to read - Batrex
-
-#directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
-# UP = 'up'
-# DOWN = 'down'
-# LEFT = 'left'
-# RIGHT = 'right'
 
 def checkcollision(obj1,obj2):
     """
@@ -38,19 +33,26 @@ def main():
         runGame()
 
 def runGame():
-    direction = 'RIGHT'
+    direction = Direction.RIGHT
     
      # This will be read from a file with a function when I can be bothered
     walls = []
-    walls.append(Wall(gameWindow,8,8))
-    walls.append(Wall(gameWindow,8,9))
+    for x in range(1, gameWindow.TILEWIDTH + 1):
+        for y in range(1, gameWindow.TILEHEIGHT + 1):
+            if random.randint(0, 10) == 0:
+                walls.append(Wall(gameWindow,x,y))
+
+    solid = []
+    for wall in walls:
+        solid.append((wall.x, wall.y))
 
     #create the pips
-    #this will be done differently when we add walls
     pips = []
-    for x in range(gameWindow.TILEWIDTH):
-        for y in range(gameWindow.TILEHEIGHT):
-            pips.append(pip(gameWindow,x+1,y+1))
+    for x in range(1, gameWindow.TILEWIDTH + 1):
+        for y in range(1, gameWindow.TILEHEIGHT + 1):
+                if (x, y) not in solid:
+                    pips.append(pip(gameWindow,x,y))
+    print(len(pips))
 
 
     # main game loop
@@ -61,13 +63,13 @@ def runGame():
                 terminate()
             elif event.type == KEYDOWN:
                 if event.key == K_LEFT:
-                    direction = 'LEFT'
+                    direction = Direction.LEFT
                 elif event.key == K_RIGHT:
-                    direction = 'RIGHT'
+                    direction = Direction.RIGHT
                 elif event.key == K_UP:
-                    direction = 'UP'
+                    direction = Direction.UP
                 elif event.key == K_DOWN:
-                    direction = 'DOWN'
+                    direction = Direction.DOWN
                 elif event.key == K_ESCAPE:
                     terminate()
         #draw the grid
@@ -80,16 +82,17 @@ def runGame():
                 del pips[index]
 
 
+        #draw the walls
+        for i in walls:
+            i.draw()
+
         #draw the pips
         for i in pips:
             i.draw()
 
-        for i in walls:
-            i.draw()
-
 
         #draw and update the capnam
-        if capnam.hitEdge(direction):
+        if capnam.hitDetect(direction, solid):
             capnam.draw()
         else:
             capnam.movePlayer(direction)
