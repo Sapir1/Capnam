@@ -22,6 +22,7 @@ class GameWindow:
         self.WHITE     = (255, 255, 255)
         self.BLACK     = (  0,   0,   0)
         self.BLUE      = (  0,   0, 255)
+        self.RED       = (255,   0,   0)
         self.YELLOW    = (255, 255,   0)
         self.DARKGRAY  = ( 40,  40,  40)
         self.BGCOLOR = self.BLACK
@@ -62,6 +63,6 @@ class GameWindow:
         displays the score as text
         """
         #first rendering the text onto a surface
-        textSurface = self.font.render(str(text),True,self.WHITE)
+        textSurface = self.font.render(str(text),True,self.RED)
         #then displaying that to the main display surface
         self.DISPLAYSURF.blit(textSurface,(0,0))
