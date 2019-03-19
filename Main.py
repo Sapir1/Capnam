@@ -3,7 +3,7 @@ from pygame.locals import *
 #import classes
 from GameWindow import GameWindow
 from Capnam import Capnam
-from pip import pip
+from Pip import Pip
 from Wall import Wall
 from direction import Direction
 
@@ -13,7 +13,7 @@ def checkcollision(obj1,obj2):
     """
     checks the collision between any two objects
     """
-    
+
     if obj1.x == obj2.x and obj1.y == obj2.y:
         return True
     else:
@@ -34,7 +34,7 @@ def main():
 
 def runGame():
     direction = Direction.RIGHT
-    
+
      # This will be read from a file with a function when I can be bothered
     walls = []
     for x in range(1, gameWindow.TILEWIDTH + 1):
@@ -46,12 +46,12 @@ def runGame():
     for wall in walls:
         solid.append((wall.x, wall.y))
 
-    #create the pips
+    #create the Pips
     pips = []
     for x in range(1, gameWindow.TILEWIDTH + 1):
         for y in range(1, gameWindow.TILEHEIGHT + 1):
                 if (x, y) not in solid:
-                    pips.append(pip(gameWindow,x,y))
+                    pips.append(Pip(gameWindow,x,y))
     print(len(pips))
 
 
@@ -75,9 +75,8 @@ def runGame():
         #draw the grid
         gameWindow.drawGrid()
         #check for the pips and capnam colliding
-        #we cant use the name pip here because that is already a class name
-        for index,item in enumerate(pips):
-            if checkcollision(item,capnam):
+        for index,pip in enumerate(pips):
+            if checkcollision(pip,capnam):
                 capnam.increaseScore()
                 del pips[index]
 

@@ -66,3 +66,12 @@ class GameWindow:
         textSurface = self.font.render(str(text),True,self.RED)
         #then displaying that to the main display surface
         self.DISPLAYSURF.blit(textSurface,(0,0))
+
+    def drawCircle(self,x,y,colour,size):
+        """
+        draws a circle
+        """
+        # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
+        xcoord = x * self.TILESIZE - int(self.TILESIZE/2)
+        ycoord = y * self.TILESIZE - int(self.TILESIZE/2)
+        pygame.draw.circle(self.DISPLAYSURF, colour, (xcoord,ycoord), size)

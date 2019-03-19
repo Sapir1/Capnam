@@ -1,10 +1,10 @@
 #player class
 
 import pygame,sys
-from baseObject import baseObject
+from BasePiece import BasePiece
 from direction import Direction
 
-class Capnam(baseObject):
+class Capnam(BasePiece):
     def __init__(self,gameWindow):
         #directions to be made ENUM? it would be needed in both main and Capnam, ideas? - A-Small-Being
         # self.UP = 'up
@@ -23,6 +23,7 @@ class Capnam(baseObject):
         self.size = int(self.gameWindow.TILESIZE/2)
         #the score
         self.score = 0
+        self.shape = "circle"
 
     def movePlayer(self,direction):
         """
@@ -55,7 +56,7 @@ class Capnam(baseObject):
             modY -= 1
         elif direction == Direction.DOWN:
             modY += 1
-        
+
         if (modX, modY) in solid:
             return True
 
@@ -75,7 +76,7 @@ class Capnam(baseObject):
             # Fine
             return False
         return True
-        
+
 
     def increaseScore(self):
         """

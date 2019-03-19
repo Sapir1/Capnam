@@ -1,10 +1,10 @@
 """
-the base class for almost everything that will be drawn in the scene
+the base class for almost everything (all the pieces) that will be drawn in the scene
 like the pips and the capnam
 """
 import pygame
 from GameWindow import GameWindow
-class baseObject:
+class BasePiece:
     def __init__(self,gameWindow):
         """
         this init function should almost
@@ -20,6 +20,6 @@ class baseObject:
         """
         draws the object
         """
-        self.xcoord = self.x * self.gameWindow.TILESIZE - int(self.gameWindow.TILESIZE/2) # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
-        self.ycoord = self.y * self.gameWindow.TILESIZE - int(self.gameWindow.TILESIZE/2)
-        pygame.draw.circle(self.gameWindow.DISPLAYSURF, self.colour, (self.xcoord,self.ycoord), self.size)
+        if (self.shape == "circle") :
+            self.gameWindow.drawCircle(self.x,self.y,self.colour,self.size)
+        #TODO: add more options
