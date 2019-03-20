@@ -22,4 +22,6 @@ class BasePiece:
         """
         if (self.shape == "circle") :
             self.gameWindow.drawCircle(self.x,self.y,self.colour,self.size)
-        #TODO: add more options
+        
+        if (self.shape == "rectangle") :
+            self.gameWindow.drawRect(self.x,self.y,self.colour, self.size)

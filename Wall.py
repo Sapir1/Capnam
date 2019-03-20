@@ -12,10 +12,10 @@ class Wall(BasePiece):
         self.gameWindow = gameWindow
         #self.pCoords = [{'x': x,'y': y}]
         self.colour = self.gameWindow.WHITE
-        self.size = int(gameWindow.TILESIZE/2)
+        self.size = gameWindow.TILESIZE
         self.x = x
         self.y = y
-        self.shape = "circle"
+        self.shape = "rectangle"
 
 
     #def drawWall(self):

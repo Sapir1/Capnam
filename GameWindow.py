@@ -75,3 +75,14 @@ class GameWindow:
         xcoord = x * self.TILESIZE - int(self.TILESIZE/2)
         ycoord = y * self.TILESIZE - int(self.TILESIZE/2)
         pygame.draw.circle(self.DISPLAYSURF, colour, (xcoord,ycoord), size)
+    
+    def drawRect(self,x,y,colour,size):
+        """
+        draws a rectangle
+        """
+        # Multiply to get pixels, subtract so corner lines up -> rectangle is drawn in correct tile
+        xcoord = x * self.TILESIZE - self.TILESIZE
+        ycoord = y * self.TILESIZE - self.TILESIZE
+        
+        pygame.draw.rect(self.DISPLAYSURF, colour, (xcoord,ycoord,size,size))
+
