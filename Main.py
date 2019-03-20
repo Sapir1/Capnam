@@ -1,4 +1,4 @@
-import random, pygame, sys
+import random, sys 
 from pygame.locals import *
 #import classes
 from GameWindow import GameWindow
@@ -35,6 +35,7 @@ def main():
 def runGame():
     direction = Direction.RIGHT
 
+    #create the walls
      # This will be read from a file with a function when I can be bothered
     walls = []
     for x in range(1, gameWindow.TILEWIDTH + 1):
@@ -42,6 +43,7 @@ def runGame():
             if random.randint(0, 10) == 0:
                 walls.append(Wall(gameWindow,x,y))
 
+    #do we need this - Batrex
     solid = []
     for wall in walls:
         solid.append((wall.x, wall.y))
@@ -57,10 +59,11 @@ def runGame():
 
     # main game loop
     while True:
-        for event in pygame.event.get(): # event handling loop
+        events = gameWindow.getEvents()
+        for event in events: # event handling loop
             print(event)
             if event.type == QUIT:
-                terminate()
+                gameWindow.terminate()
             elif event.type == KEYDOWN:
                 if event.key == K_LEFT:
                     direction = Direction.LEFT
@@ -100,14 +103,11 @@ def runGame():
         # Displays score on screen
         gameWindow.displayText(capnam.score)
 
-        pygame.display.update()
+        gameWindow.updatePygame()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)
 
 
 
-def terminate():
-    pygame.quit()
-    sys.exit()
 
 
 

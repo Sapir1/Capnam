@@ -2,7 +2,6 @@
 the base class for almost everything (all the pieces) that will be drawn in the scene
 like the pips and the capnam
 """
-import pygame
 from GameWindow import GameWindow
 class BasePiece:
     def __init__(self,gameWindow):
@@ -22,6 +21,6 @@ class BasePiece:
         """
         if (self.shape == "circle") :
             self.gameWindow.drawCircle(self.x,self.y,self.colour,self.size)
-        
+
         if (self.shape == "rectangle") :
             self.gameWindow.drawRect(self.x,self.y,self.colour, self.size)
