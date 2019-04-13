@@ -58,14 +58,14 @@ class GameWindow:
     #         self.y = coord['y'] * self.TILESIZE - 10
     #         pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
 
-    def displayText(self,text):
+    def displayText(self,text, x, y):
         """
-        displays the score as text
+        displays stuff as text
         """
         #first rendering the text onto a surface
         textSurface = self.font.render(str(text),True,self.RED)
         #then displaying that to the main display surface
-        self.DISPLAYSURF.blit(textSurface,(0,0))
+        self.DISPLAYSURF.blit(textSurface,(x,y))
 
     def drawCircle(self,x,y,colour,size):
         """

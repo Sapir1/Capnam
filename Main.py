@@ -6,6 +6,7 @@ from Capnam import Capnam
 from Pip import Pip
 from Wall import Wall
 from direction import Direction
+from level_gen import gen_level
 
 #we might want to divide this script up later or it will get really large and hard to read - Batrex
 
@@ -34,26 +35,12 @@ def main():
 
 def runGame():
     direction = Direction.RIGHT
-
-     # This will be read from a file with a function when I can be bothered
+    level = 0
     walls = []
-    for x in range(1, gameWindow.TILEWIDTH + 1):
-        for y in range(1, gameWindow.TILEHEIGHT + 1):
-            if random.randint(0, 10) == 0:
-                walls.append(Wall(gameWindow,x,y))
-
     solid = []
-    for wall in walls:
-        solid.append((wall.x, wall.y))
-
-    #create the Pips
     pips = []
-    for x in range(1, gameWindow.TILEWIDTH + 1):
-        for y in range(1, gameWindow.TILEHEIGHT + 1):
-                if (x, y) not in solid:
-                    pips.append(Pip(gameWindow,x,y))
-    print(len(pips))
 
+    gen_level(gameWindow, walls, solid, pips)    
 
     # main game loop
     while True:
@@ -97,11 +84,26 @@ def runGame():
             capnam.movePlayer(direction)
             capnam.draw()
 
+        #Generate a new level once no pips left, resetting capnam
+        if len(pips) == 0:
+            direction = Direction.RIGHT
+            capnam.x = 10
+            capnam.y = 10
+            level += 1
+            walls.clear()
+            solid.clear()
+            gen_level(gameWindow, walls, solid, pips)
+
+
         # Displays score on screen
-        gameWindow.displayText(capnam.score)
+        gameWindow.displayText(capnam.score, 0, 0)
+        gameWindow.displayText(level, gameWindow.WINDOWWIDTH - (len(str(level))*15), 0)
 
         pygame.display.update()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)
+
+
+
 
 
 
