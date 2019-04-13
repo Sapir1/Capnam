@@ -1,7 +1,7 @@
 # Wall class
-from baseObject import baseObject
+from BasePiece import BasePiece
 
-class Wall(baseObject):
+class Wall(BasePiece):
     def __init__(self,gameWindow,x,y):
         # # self.wCoords = wCoords
         # self.pCoords = [{'x': 10,'y': 10},
@@ -12,10 +12,11 @@ class Wall(baseObject):
         self.gameWindow = gameWindow
         #self.pCoords = [{'x': x,'y': y}]
         self.colour = self.gameWindow.WHITE
-        self.size = int(gameWindow.TILESIZE/2)
+        self.size = gameWindow.TILESIZE
         self.x = x
         self.y = y
-        
+        self.shape = "rectangle"
+
 
     #def drawWall(self):
      #   """

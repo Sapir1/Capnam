@@ -1,6 +1,5 @@
 #Game window class
 
-#Import pygame - not sure what is needed here - A-Small-Being
 import pygame, sys
 from pygame.locals import *
 
@@ -58,11 +57,41 @@ class GameWindow:
     #         self.y = coord['y'] * self.TILESIZE - 10
     #         pygame.draw.circle(self.DISPLAYSURF, self.YELLOW, (self.x,self.y), 10)
 
-    def displayText(self,text):
+    def displayText(self,text, x, y):
         """
-        displays the score as text
+        displays stuff as text
         """
         #first rendering the text onto a surface
         textSurface = self.font.render(str(text),True,self.RED)
         #then displaying that to the main display surface
-        self.DISPLAYSURF.blit(textSurface,(0,0))
+        self.DISPLAYSURF.blit(textSurface,(x,y))
+
+    def drawCircle(self,x,y,colour,size):
+        """
+        draws a circle
+        """
+        # Multiply to get pixels, subtract so centre lines up -> circle lines up with grid
+        xcoord = x * self.TILESIZE - int(self.TILESIZE/2)
+        ycoord = y * self.TILESIZE - int(self.TILESIZE/2)
+        pygame.draw.circle(self.DISPLAYSURF, colour, (xcoord,ycoord), size)
+
+    def drawRect(self,x,y,colour,size):
+        """
+        draws a rectangle
+        """
+        # Multiply to get pixels, subtract so corner lines up -> rectangle is drawn in correct tile
+        xcoord = x * self.TILESIZE - self.TILESIZE
+        ycoord = y * self.TILESIZE - self.TILESIZE
+
+        pygame.draw.rect(self.DISPLAYSURF, colour, (xcoord,ycoord,size,size))
+
+    def terminate(self):
+        #exit the game
+        pygame.quit()
+        sys.exit()
+
+    def getEvents(self):
+        return(pygame.event.get())
+
+    def updatePygame(self):
+        pygame.display.update()

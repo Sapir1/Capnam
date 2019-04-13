@@ -1,11 +1,12 @@
-import random, pygame, sys
+import random, sys 
 from pygame.locals import *
 #import classes
 from GameWindow import GameWindow
 from Capnam import Capnam
-from pip import pip
+from Pip import Pip
 from Wall import Wall
 from direction import Direction
+from level_gen import gen_level
 
 #we might want to divide this script up later or it will get really large and hard to read - Batrex
 
@@ -13,7 +14,7 @@ def checkcollision(obj1,obj2):
     """
     checks the collision between any two objects
     """
-    
+
     if obj1.x == obj2.x and obj1.y == obj2.y:
         return True
     else:
@@ -34,33 +35,20 @@ def main():
 
 def runGame():
     direction = Direction.RIGHT
-    
-     # This will be read from a file with a function when I can be bothered
+    level = 0
     walls = []
-    for x in range(1, gameWindow.TILEWIDTH + 1):
-        for y in range(1, gameWindow.TILEHEIGHT + 1):
-            if random.randint(0, 10) == 0:
-                walls.append(Wall(gameWindow,x,y))
-
     solid = []
-    for wall in walls:
-        solid.append((wall.x, wall.y))
-
-    #create the pips
     pips = []
-    for x in range(1, gameWindow.TILEWIDTH + 1):
-        for y in range(1, gameWindow.TILEHEIGHT + 1):
-                if (x, y) not in solid:
-                    pips.append(pip(gameWindow,x,y))
-    print(len(pips))
 
+    gen_level(gameWindow, walls, solid, pips)    
 
     # main game loop
     while True:
-        for event in pygame.event.get(): # event handling loop
+        events = gameWindow.getEvents()
+        for event in events: # event handling loop
             print(event)
             if event.type == QUIT:
-                terminate()
+                gameWindow.terminate()
             elif event.type == KEYDOWN:
                 if event.key == K_LEFT:
                     direction = Direction.LEFT
@@ -75,9 +63,8 @@ def runGame():
         #draw the grid
         gameWindow.drawGrid()
         #check for the pips and capnam colliding
-        #we cant use the name pip here because that is already a class name
-        for index,item in enumerate(pips):
-            if checkcollision(item,capnam):
+        for index,pip in enumerate(pips):
+            if checkcollision(pip,capnam):
                 capnam.increaseScore()
                 del pips[index]
 
@@ -98,17 +85,26 @@ def runGame():
             capnam.movePlayer(direction)
             capnam.draw()
 
-        # Displays score on screen
-        gameWindow.displayText(capnam.score)
+        #Generate a new level once no pips left, resetting capnam
+        if len(pips) == 0:
+            direction = Direction.RIGHT
+            capnam.x = 10
+            capnam.y = 10
+            level += 1
+            walls.clear()
+            solid.clear()
+            gen_level(gameWindow, walls, solid, pips)
 
-        pygame.display.update()
+
+        # Displays score on screen
+        gameWindow.displayText(capnam.score, 0, 0)
+        gameWindow.displayText(level, gameWindow.WINDOWWIDTH - (len(str(level))*15), 0)
+
+        gameWindow.updatePygame()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)
 
 
 
-def terminate():
-    pygame.quit()
-    sys.exit()
 
 
 
