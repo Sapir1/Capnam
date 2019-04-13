@@ -1,6 +1,5 @@
 #Game window class
 
-#Import pygame - not sure what is needed here - A-Small-Being
 import pygame, sys
 from pygame.locals import *
 
@@ -75,7 +74,7 @@ class GameWindow:
         xcoord = x * self.TILESIZE - int(self.TILESIZE/2)
         ycoord = y * self.TILESIZE - int(self.TILESIZE/2)
         pygame.draw.circle(self.DISPLAYSURF, colour, (xcoord,ycoord), size)
-    
+
     def drawRect(self,x,y,colour,size):
         """
         draws a rectangle
@@ -83,6 +82,16 @@ class GameWindow:
         # Multiply to get pixels, subtract so corner lines up -> rectangle is drawn in correct tile
         xcoord = x * self.TILESIZE - self.TILESIZE
         ycoord = y * self.TILESIZE - self.TILESIZE
-        
+
         pygame.draw.rect(self.DISPLAYSURF, colour, (xcoord,ycoord,size,size))
 
+    def terminate(self):
+        #exit the game
+        pygame.quit()
+        sys.exit()
+
+    def getEvents(self):
+        return(pygame.event.get())
+
+    def updatePygame(self):
+        pygame.display.update()

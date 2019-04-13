@@ -1,4 +1,4 @@
-import random, pygame, sys
+import random, sys 
 from pygame.locals import *
 #import classes
 from GameWindow import GameWindow
@@ -44,10 +44,11 @@ def runGame():
 
     # main game loop
     while True:
-        for event in pygame.event.get(): # event handling loop
+        events = gameWindow.getEvents()
+        for event in events: # event handling loop
             print(event)
             if event.type == QUIT:
-                terminate()
+                gameWindow.terminate()
             elif event.type == KEYDOWN:
                 if event.key == K_LEFT:
                     direction = Direction.LEFT
@@ -99,17 +100,11 @@ def runGame():
         gameWindow.displayText(capnam.score, 0, 0)
         gameWindow.displayText(level, gameWindow.WINDOWWIDTH - (len(str(level))*15), 0)
 
-        pygame.display.update()
+        gameWindow.updatePygame()
         gameWindow.FPSCLOCK.tick(gameWindow.FPS)
 
 
 
-
-
-
-def terminate():
-    pygame.quit()
-    sys.exit()
 
 
 

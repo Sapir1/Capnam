@@ -1,6 +1,6 @@
 #player class
 
-import pygame,sys
+import sys
 from BasePiece import BasePiece
 from direction import Direction
 
