@@ -16,8 +16,11 @@ class Capnam(BasePiece):
         self.gameWindow = gameWindow
 
         #start point
-        self.x = 10
-        self.y = 10
+        self.startx = 10
+        self.starty = 10
+        #coordinates
+        self.x = self.startx
+        self.y = self.starty
         #set the colour and size for drawing
         self.colour = self.gameWindow.YELLOW
         self.size = int(self.gameWindow.TILESIZE/2)

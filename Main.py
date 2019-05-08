@@ -1,4 +1,4 @@
-import random, sys 
+import random, sys
 from pygame.locals import *
 #import classes
 from GameWindow import GameWindow
@@ -6,19 +6,7 @@ from Capnam import Capnam
 from Pip import Pip
 from Wall import Wall
 from direction import Direction
-from level_gen import gen_level
-
-#we might want to divide this script up later or it will get really large and hard to read - Batrex
-
-def checkcollision(obj1,obj2):
-    """
-    checks the collision between any two objects
-    """
-
-    if obj1.x == obj2.x and obj1.y == obj2.y:
-        return True
-    else:
-        return False
+from Functions import *
 
 def main():
     global gameWindow
@@ -40,7 +28,7 @@ def runGame():
     solid = []
     pips = []
 
-    gen_level(gameWindow, walls, solid, pips)    
+    genlevel(gameWindow, walls, solid, pips)
 
     # main game loop
     while True:
@@ -88,12 +76,12 @@ def runGame():
         #Generate a new level once no pips left, resetting capnam
         if len(pips) == 0:
             direction = Direction.RIGHT
-            capnam.x = 10
-            capnam.y = 10
+            capnam.x = capnam.startx
+            capnam.y = capnam.startx
             level += 1
             walls.clear()
             solid.clear()
-            gen_level(gameWindow, walls, solid, pips)
+            genlevel(gameWindow, walls, solid, pips)
 
 
         # Displays score on screen
