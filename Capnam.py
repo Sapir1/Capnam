@@ -16,8 +16,8 @@ class Capnam(BasePiece):
         self.gameWindow = gameWindow
 
         #start point
-        self.startx = 10
-        self.starty = 10
+        self.startx = int((self.gameWindow.WINDOWHEIGHT / self.gameWindow.TILESIZE) / 2)
+        self.starty = int((gameWindow.WINDOWWIDTH / self.gameWindow.TILESIZE) / 2)
         #coordinates
         self.x = self.startx
         self.y = self.starty

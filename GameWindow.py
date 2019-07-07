@@ -2,14 +2,15 @@
 
 import pygame, sys
 from pygame.locals import *
+import random
 
 class GameWindow:
     def __init__(self):
         #set variables
-        self.FPS = 8
-        self.WINDOWWIDTH = 640
-        self.WINDOWHEIGHT = 640
-        self.TILESIZE = 40
+        self.FPS = int(random.randint(4, 100) / random.randint(1, 16))
+        self.TILESIZE = random.randint(1, 100)
+        self.WINDOWWIDTH = self.TILESIZE * random.randint(2, 10)
+        self.WINDOWHEIGHT = self.WINDOWWIDTH
         #check it works
         assert self.WINDOWWIDTH % self.TILESIZE == 0, "Window width must be a multiple of tile size."
         assert self.WINDOWHEIGHT % self.TILESIZE == 0, "Window height must be a multiple of tile size."
@@ -18,12 +19,12 @@ class GameWindow:
         self.TILEHEIGHT = int(self.WINDOWHEIGHT / self.TILESIZE)
 
         #Colors            R    G    B
-        self.WHITE     = (255, 255, 255)
-        self.BLACK     = (  0,   0,   0)
-        self.BLUE      = (  0,   0, 255)
-        self.RED       = (255,   0,   0)
-        self.YELLOW    = (255, 255,   0)
-        self.DARKGRAY  = ( 40,  40,  40)
+        self.WHITE     = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.BLACK     = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.BLUE      = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.RED       = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.YELLOW    = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        self.DARKGRAY  = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         self.BGCOLOR = self.BLACK
 
     def initialiseGame(self):

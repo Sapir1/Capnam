@@ -17,7 +17,6 @@ def main():
     gameWindow.initialiseGame()
     gameWindow.drawGrid()
 
-
     while True:
         runGame()
 
@@ -47,7 +46,7 @@ def runGame():
                 elif event.key == K_DOWN:
                     direction = Direction.DOWN
                 elif event.key == K_ESCAPE:
-                    terminate()
+                    gameWindow.terminate()
         #draw the grid
         gameWindow.drawGrid()
         #check for the pips and capnam colliding
